@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -12,6 +13,12 @@ const createPath = page => path.resolve(__dirname, 'ejs-views', `${page}.ejs`);
 app.listen(PORT, err => {
   err ? console.log(err) : console.log(`Server was started on port ${PORT}`);
 });
+
+app.use(
+  morgan(':method :url :status :res[content-length] - :response-time ms')
+);
+
+app.use(express.static('./styles'));
 
 app.get('/', (req, res) => {
   /** We don't need to set content-type header - express automatically detects the sending data-type & sets the header! **/
