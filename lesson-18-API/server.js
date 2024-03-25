@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const methodOverriide = require('method-override');
 
+const apiPostRoutes = require('./routes/api-post-routs');
 const postRoutes = require('./routes/post-routes');
 const contactRoutes = require('./routes/contact-routes');
 const createPath = require('./helpers/create-path');
@@ -50,6 +51,7 @@ app.get('/about-us', (req, res) => {
   res.redirect('/');
 });
 
+app.use(apiPostRoutes);
 app.use(postRoutes);
 app.use(contactRoutes);
 
